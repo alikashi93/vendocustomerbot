@@ -1,0 +1,20 @@
+services:
+  vendo-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vendo-customer-bot
+    restart: unless-stopped
+    # هیچ port mappingای وجود ندارد:
+    # بات از Long Polling استفاده می‌کند و خودش به تلگرام وصل می‌شود؛
+    # هیچ سرویسی روی هیچ پورتی گوش نمی‌دهد و نیازی به expose پورت نیست.
+    env_file:
+      - .env
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - ADMIN_CHAT_ID=${ADMIN_CHAT_ID}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
