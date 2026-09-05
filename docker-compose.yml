@@ -5,11 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: vendo-customer-bot
     restart: unless-stopped
-    # هیچ port mappingای وجود ندارد:
-    # بات از Long Polling استفاده می‌کند و خودش به تلگرام وصل می‌شود؛
-    # هیچ سرویسی روی هیچ پورتی گوش نمی‌دهد و نیازی به expose پورت نیست.
-    env_file:
-      - .env
+    # بدون هیچ port mapping — بات فقط polling است و پورتی لازم ندارد
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
       - ADMIN_CHAT_ID=${ADMIN_CHAT_ID}
